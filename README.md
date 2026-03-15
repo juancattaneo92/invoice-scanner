@@ -87,3 +87,14 @@ ollama serve
 # In another terminal, pull the model (one-time)
 ollama pull llama2
 ```
+
+### 4. Architecture
+
+## Module 1: Shared Utilities
+```bash
+- config.py - Loads environment variables
+- exceptions.py - Custom error classes
+- logger.py - Logging setup
+- models.py - Data validation schemas (Pydantic)
+- __init__.py - Package exports
+```
