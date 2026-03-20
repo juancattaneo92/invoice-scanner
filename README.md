@@ -98,3 +98,11 @@ ollama pull llama2
 - models.py - Data validation schemas (Pydantic)
 - __init__.py - Package exports
 ```
+
+## Module 2: OCR Service
+```bash
+- config.py - Loads OCR environment variables
+- processor.py - Extracts text from PDFs and images with PaddleOCR
+- main.py - API entry point with FastAPI application
+- __init__.py - Package exports
+```
