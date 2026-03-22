@@ -39,3 +39,37 @@ __all__ = [
     "OLLAMA_MODEL",
     "LOG_LEVEL",
 ]
+
+# ============================================
+# SHARED UTILITIES - STARTUP & TESTING GUIDE
+# ============================================
+# To Test Config:
+# python -c "from src.shared.config import API_HOST, API_PORT; print(f'API: {API_HOST}:{API_PORT}')"
+# Expected: API: 0.0.0.0:8000
+
+# To Test Logger:
+# python << 'EOF'
+# from src.shared.logger import logger
+# logger.info("✅ Logger working!")
+# logger.error("Test error")
+# EOF
+# Expected: Colored output in terminal + messages in logs/app.log
+
+# To Test Exceptions:
+# python -c "from src.shared.exceptions import OCRException; print('✅ Exceptions imported')"
+# Expected: ✅ Exceptions imported
+
+# To Test Models:
+# python << 'EOF'
+# from src.shared.models import InvoiceCreate
+# invoice = InvoiceCreate(vendor="Test", date="2024-01-15", total=100.0)
+# print(f"✅ Models working: {invoice.vendor}")
+# EOF
+# Expected: ✅ Models working: Test
+
+# To Test All Shared Utilities Together:
+# python -c "from src.shared import API_HOST, logger, InvoiceCreate, OCRException; print('✅ Shared utilities working!')"
+# Expected: ✅ Shared utilities working!
+
+# View Log File:
+# cat logs/app.log

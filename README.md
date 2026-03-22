@@ -50,6 +50,7 @@ ollama --version
 ```
  
 ## Quick Start
+### 0. Startup & Testing Guide available at each service folder at config.py
  
 ### 1. Clone and Navigate
 ```bash
@@ -103,6 +104,15 @@ ollama pull llama2
 ```bash
 - config.py - Loads OCR environment variables
 - processor.py - Extracts text from PDFs and images with PaddleOCR
+- main.py - API entry point with FastAPI application
+- __init__.py - Package exports
+```
+
+## Module 3: LLM Service
+```bash
+- config.py - Loads LLM environment variables (model, temperature, port)
+- prompts.py - System prompts for invoice data extraction
+- processor.py - Calls Ollama and parses JSON responses with validation
 - main.py - API entry point with FastAPI application
 - __init__.py - Package exports
 ```
