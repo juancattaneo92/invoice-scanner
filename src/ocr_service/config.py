@@ -1,5 +1,5 @@
 """
-Invoice Parser: OCR Service configuration
+Invoice Scanner: OCR Service configuration
 This file loads all environment variables from .env file
 and makes them accessible throughout the OCR service
 """

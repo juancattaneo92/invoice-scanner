@@ -1,5 +1,5 @@
 """
-Invoice Parser: OCR Service package
+Invoice Scanner: OCR Service package
 """
 from src.ocr_service.processor import ocr_processor
 

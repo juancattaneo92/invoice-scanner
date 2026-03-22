@@ -1,5 +1,5 @@
 """
-Invoice Parser: System prompts powered by AI to extract data from invoices
+Invoice Scanner: System prompts powered by AI to extract data from invoices
 """
 
 INVOICE_EXTRACTION_PROMPT = """

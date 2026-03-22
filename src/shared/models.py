@@ -1,5 +1,5 @@
 """
-Invoice Parser: Shared data models used across services.
+Invoice Scanner: Shared data models used across services.
 This file defines data validation schemas using Pydantic. 
 These are the data types the app accepts and returns.
 """

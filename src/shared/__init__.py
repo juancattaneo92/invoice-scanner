@@ -1,5 +1,5 @@
 """
-Invoice Parser: Shared utilities package
+Invoice Scanner: Shared utilities package
 """
 from src.shared.logger import logger
 from src.shared.config import *

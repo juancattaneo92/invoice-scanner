@@ -1,5 +1,5 @@
 """
-Invoice Parser: LLM Service configuration
+Invoice Scanner: LLM Service configuration
 """
 
 # Ollama settings
@@ -12,7 +12,7 @@ SERVICE_PORT = 8002
 SERVICE_NAME = "llm_service"
 
 # FastAPI settings
-FASTAPI_TITLE = "Invoice Parser LLM Service"
+FASTAPI_TITLE = "Invoice Scanner LLM Service"
 FASTAPI_DESCRIPTION = "Structures invoice data using Ollama Llama2"
 FASTAPI_VERSION = "1.0.0"
 
@@ -43,15 +43,15 @@ FASTAPI_VERSION = "1.0.0"
 # To Test Structure Extraction (Extract & Structure OCR Text):
 # curl -X POST http://localhost:8002/structure \
 #   -H "Content-Type: application/json" \
-#   -d '{"text": "Invoice #123\nVendor: Acme Corp\nTotal: $500"}'
+#   -d '{"text": "Invoice #123\nVendor: Test Corp\nTotal: $100"}'
 # Expected response:
 # {
 #     "status": "success",
 #     "data": {
-#         "vendor_name": "Acme Corp",
-#         "invoice_date": "2024-01-15",
+#         "vendor_name": "Test Corp",
+#         "invoice_date": "2020-01-01",
 #         "invoice_number": "123",
-#         "total_amount": 500.0,
+#         "total_amount": 100.0,
 #         "tax_amount": null,
 #         "subtotal_amount": null,
 #         "line_items": []

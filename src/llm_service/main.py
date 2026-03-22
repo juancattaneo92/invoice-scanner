@@ -1,5 +1,5 @@
 """
-Invoice Parser: LLM Service - FastAPI application
+Invoice Scanner: LLM Service - FastAPI application
 Structures OCR text into invoice data using Ollama
 """
 from contextlib import asynccontextmanager

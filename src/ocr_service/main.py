@@ -1,5 +1,5 @@
 """
-Invoice Parser: OCR Service - FastAPI application
+Invoice Scanner: OCR Service - FastAPI application
 Extracts text from PDFs and images
 """
 from fastapi import FastAPI, UploadFile, File, HTTPException

@@ -1,5 +1,5 @@
 """
-Invoice Parser: OCR Processing logic using PaddleOCR
+Invoice Scanner: OCR Processing logic using PaddleOCR
 """
 import tempfile
 from pathlib import Path

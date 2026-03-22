@@ -1,5 +1,5 @@
 """
-Invoice Parser: Configuration and environment variables
+Invoice Scanner: Configuration and environment variables
 This file loads all environment variables from .env file 
 and makes them accessible throughout the entire application
 """

@@ -116,3 +116,5 @@ ollama pull llama2
 - main.py - API entry point with FastAPI application
 - __init__.py - Package exports
 ```
+
+## Module 4: Storage Service

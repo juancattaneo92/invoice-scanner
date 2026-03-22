@@ -1,14 +1,13 @@
 """
-Invoice Parser: LLM Processing logic using Ollama
+Invoice Scanner: LLM Processing logic using Ollama
 """
 import json
 import re
 import ollama
 from src.shared.logger import logger
 from src.shared.exceptions import LLMException
-from src.llm_service.config import OLLAMA_MODEL, TEMPERATURE, MAX_TOKENS
+from src.llm_service.config import OLLAMA_MODEL, TEMPERATURE
 from src.llm_service.prompts import get_extraction_prompt
-from src.shared.config import OLLAMA_BASE_URL
 
 class LLMProcessor:
     """Handles LLM operations"""

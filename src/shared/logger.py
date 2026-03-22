@@ -1,5 +1,5 @@
 """
-Invoice Parser: Centralized logging configuration
+Invoice Scanner: Centralized logging configuration
 This file sets up centralized logging for your entire application. 
 This logger records what's happening, when it happened, and how serious it is.
 """

@@ -1,5 +1,5 @@
 """
-Invoice Parser: Custom exceptions for the application
+Invoice Scanner: Custom exceptions for the application
 This file defines custom error classes specific to this application.
 Instead of generic Python errors, we will get more meaningful errors.
 """
