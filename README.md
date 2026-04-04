@@ -118,3 +118,178 @@ ollama pull llama2
 ```
 
 ## Module 4: Storage Service
+```bash
+- config.py - Loads Storage environment variables and SQLite settings
+- database.py - SQLAlchemy engine setup and session management
+- models.py - ORM models for invoices and line items tables
+- queries.py - Database CRUD operations (create, get, list invoices)
+- main.py - API entry point with FastAPI application
+- __init__.py - Package exports
+```
+
+## Module 5: API Gateway
+```bash
+- main.py - Orchestrates OCR → LLM → Storage pipeline, exposes unified API
+- __init__.py - Package exports
+```
+
+## Running the Services
+
+Each service runs in its own terminal. Start them in order:
+
+**Terminal 1 — Ollama (LLM backend):**
+```bash
+ollama serve
+```
+
+**Terminal 2 — OCR Service:**
+```bash
+source venv/bin/activate
+python -m uvicorn src.ocr_service.main:app --port 8001 --reload
+```
+
+**Terminal 3 — LLM Service:**
+```bash
+source venv/bin/activate
+python -m uvicorn src.llm_service.main:app --port 8002 --reload
+```
+
+**Terminal 4 — Storage Service:**
+```bash
+source venv/bin/activate
+python -m uvicorn src.storage_service.main:app --port 8003 --reload
+```
+
+**Terminal 5 — API Gateway:**
+```bash
+source venv/bin/activate
+python -m uvicorn src.api_gateway.main:app --port 8000 --reload
+```
+
+**Verify all services are up:**
+```bash
+curl http://localhost:8000/health
+```
+
+Expected response:
+```json
+{
+    "status": "healthy",
+    "services": {
+        "ocr": true,
+        "llm": true,
+        "storage": true
+    }
+}
+```
+
+## API Endpoints
+
+All requests go through the API Gateway on port 8000.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Welcome / version info |
+| GET | `/health` | Health check for all services |
+| POST | `/upload` | Upload invoice file for processing |
+| GET | `/status/{invoice_id}` | Get invoice by ID |
+| GET | `/invoices` | List all invoices |
+
+### Upload an invoice
+```bash
+curl -X POST http://localhost:8000/upload \
+  -F "file=@path/to/invoice.pdf"
+```
+
+Supported formats: `.pdf`, `.jpg`, `.jpeg`, `.png`, `.tiff`
+
+Example response:
+```json
+{
+    "status": "success",
+    "invoice_id": 1,
+    "filename": "invoice.pdf",
+    "vendor": "Acme Corp",
+    "date": "2024-01-15",
+    "total": 250.00,
+    "tax": 25.00,
+    "line_items": []
+}
+```
+
+### List all invoices
+```bash
+curl http://localhost:8000/invoices
+```
+
+### Get invoice by ID
+```bash
+curl http://localhost:8000/status/1
+```
+
+## CLI Scripts
+
+Run these from the `scripts/` directory with the virtual environment activated.
+
+### Upload an invoice
+```bash
+cd scripts
+python upload_invoice.py path/to/invoice.pdf
+```
+
+### Check invoice status
+```bash
+cd scripts
+python check_status.py 1
+```
+
+### List all invoices
+```bash
+cd scripts
+python list_invoices.py
+```
+
+## Project Structure
+
+```
+invoice-scanner/
+├── src/
+│   ├── shared/              # Shared utilities across all services
+│   │   ├── config.py        # Service URLs and environment variables
+│   │   ├── exceptions.py    # Custom exception classes
+│   │   ├── logger.py        # Logging configuration
+│   │   └── models.py        # Pydantic data models
+│   ├── api_gateway/         # Port 8000 - Main entry point
+│   │   └── main.py
+│   ├── ocr_service/         # Port 8001 - Text extraction
+│   │   ├── config.py
+│   │   ├── processor.py
+│   │   └── main.py
+│   ├── llm_service/         # Port 8002 - Data structuring
+│   │   ├── config.py
+│   │   ├── prompts.py
+│   │   ├── processor.py
+│   │   └── main.py
+│   └── storage_service/     # Port 8003 - Database operations
+│       ├── config.py
+│       ├── database.py
+│       ├── models.py
+│       ├── queries.py
+│       └── main.py
+├── scripts/                 # CLI tools
+│   ├── config.py
+│   ├── upload_invoice.py
+│   ├── check_status.py
+│   └── list_invoices.py
+├── tests/
+├── requirements.txt
+└── README.md
+```
+
+## Troubleshooting
+
+- **Port already in use:** `lsof -i :<port>` then `kill -9 <PID>`
+- **PaddleOCR slow on first start:** Normal — downloads ~200MB of models once
+- **LLM not responding:** Make sure `ollama serve` is running and `llama2` is pulled
+- **Database not created:** Ensure the `data/` directory exists and is writable
+- **Low OCR confidence:** Image may be blurry or low resolution
